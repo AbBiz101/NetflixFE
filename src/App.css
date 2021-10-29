@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+}
+
+html {
+  background: #141414;
+}
+
+#root {
+  background: #141414;
+}
+
+body {
+  background: #141414;
+  overflow-x: hidden;
+}
+
+#profile-image {
+  width: 35px;
+  height: 35px;
+}
+
+.profile-button {
+  background: transparent;
+  border: none;
+  color: white;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: none;
+  margin-right: 20px;
+}
+
+.profile-button:hover {
+  color: rgb(63, 63, 63);
+  text-decoration: none;
+  border-radius: 0px;
+  background: transparent;
+}
+
+.profile-button:focus {
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+.bg-color {
+  background: #141414;
+}
+
+.kids-text {
+  text-align: center;
+  color: white;
+  margin-right: 25px;
+  margin-bottom: 2px;
+}
+
+.search-icon {
+  margin-right: 25px;
+  margin-bottom: 5px;
+}
+
+.bell-icon {
+  margin-bottom: 5px;
+  margin-right: 15px;
+}
+
+.tv-shows {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-left: 25px;
+  position: relative;
+  margin-top: 100px;
+}
+
+.genres-button {
+  margin-left: 30px;
+  border-radius: 0px;
+  border: 1px solid white;
+  background: black;
+  width: 110px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.genres-button:hover {
+  background: black;
+}
+
+.genres-button:focus {
+  background: black;
+  outline: none;
+  border: 1px solid white;
+  box-shadow: none;
+}
+
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 25px;
+  vertical-align: .255em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
+}
+
+.dropdown-toggle-new::after {
+  display: inline-block;
+  margin-left: .255em;
+  vertical-align: .255em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
+}
+
+.netflix-logo {
+  width: 100px;
+  height: 50px;
+}
+
+.double-button {
+  margin-right: 70px;
+}
+
+.double-buttons {
+  border-radius: 0px;
+  background: #141414;
+  border: 1px solid white;
+  color: gray;
+  width: 55px;
+  text-align: center;
+  height: 40px;
+}
+
+.double-buttons:hover {
+  background: rgb(71, 71, 71);
+}
+
+.double-buttons:focus {
+  background: rgb(71, 71, 71);
+  box-shadow: none;
+  border: 3px solid rgb(255, 255, 255);
+}
+
+#service-code {
+  background: #141414;
+  color: grey;
+  border: 1px solid grey;
+  font-size: 13px;
+  padding: .5em;
+  height: 35px;
+  margin-left: 12px;
+}
+
+
+#service-code:hover {
+  background: rgb(71, 71, 71);
+  color: white;
+}
+
+#service-code:focus {
+  background: rgb(71, 71, 71);
+  box-shadow: none;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+
+.color-p-in-col {
+  color: grey;
+}
+
+.shows-title {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-left: 16px;
+  position: relative;
+  margin-top: 100px;
+  text-transform: capitalize;
+}
+
+.col-size-style {
+  border: none;
+}
+
+.footer-content {
+  margin-top: 150px;
+}
+
+
+
+.social-links {
+
+  color: grey
+}
+
+.socials {
+
+  margin-top: 30px;
+  padding-left: 10px;
+}
+
+.icons {
+  width: 36px;
+  height: 25px;
+}
+
+.social-box {
+
+  margin-right: 15px;
+  margin-bottom: 1em;
+  width: 36px;
+  height: 27px;
+}
+
+.social-links:hover {
+  color: grey;
+}
+
+.text-underline:hover {
+
+  color:grey;
+  border-bottom: 1px solid grey;
+}
+
+a {
+
+  color: grey;
+}
+
+.img-styled {
+  height: 340px;
+}
+
+.card-movie-details {
+  width: 250px;
+  height: 500px;
+  margin-top: 200px;
+  border: none;
+}
+
+.text-dotted-ovf {
+  height: 40px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.title-details {
+  font-size: 18px!important;
+  height: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  margin: 0;
+}
+
+.img-netflix-movies {
+  height: 400px;
+  object-fit: cover;
+}
+
+.spacer {
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  width: 100%;
+}
+
+.spinner-border {
+  margin: auto!important;
+}
+
+.dropdown {
+  background: transparent;
+}
+
+#login-btn {
+  background-color: transparent;
+  border: transparent;
+}
+
+#login-btn:focus {
+  box-shadow: none;
+  outline: none;
+  border: none;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
