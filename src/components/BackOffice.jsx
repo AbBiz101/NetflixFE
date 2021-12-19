@@ -1,42 +1,53 @@
 import { React, useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function BackOffice() {
 	const [movie, setMovie] = useState({
 		Title: '',
 		Year: '',
 		Type: '',
+		Poster: '',
 	});
+
 	const [image, setImage] = useState(null);
 
 	const inputHandler = (propName, value) => {
 		setMovie({ ...movie, [propName]: value });
 	};
 
+	const isFormComplete = () => {
+		return (
+			movie.Title.length > 0 && movie.Year.length > 0 && movie.Type.length > 0
+		);
+	};
+
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		try {
-			const formDt = new FormData();
-			formDt.append('Poster', image);
-			let post = await fetch('https://mynetflixapi.herokuapp.com/media', {
+			let post = await fetch('http://localhost:3004/media', {
 				method: 'POST',
 				body: JSON.stringify(movie),
 				headers: {
 					'Content-type': 'application/json',
 				},
 			});
-			const data = await post.json();
-			console.log(data);
 			if (post.ok) {
-				const formDt = new FormData();
-				formDt.append('Poster', image);
-				let imgpost = await fetch(
-					'https://mynetflixapi.herokuapp.com/media/' + data.imdbID + '/poster',
-					{ method: 'POST', body: formDt },
-				);
-				if (imgpost.ok) {
-					alert('Movie posted successfully.');
-					setMovie({ Title: '', Year: '', Type: '' });
+				let data = await post.json();
+				console.log(data);
+				try {
+					let formDt = new FormData();
+					formDt.append('Poster', image);
+					let imgpost = await fetch(
+						'http://localhost:3004/media/' + data.imdbID + '/poster',
+						{ method: 'POST', body: formDt },
+					);
+					if (imgpost.ok) {
+						alert('Movie posted successfully.');
+						setMovie({ Title: '', Year: '', Type: '', Poster: '' });
+					}
+				} catch (error) {
+					console.error(error);
 				}
 			} else {
 				alert('Posting Movie to the database failed.');
@@ -46,63 +57,121 @@ export default function BackOffice() {
 		}
 	};
 
-	const isFormComplete = () => {
-		return (
-			movie.Title.length > 0 && movie.Year.length > 0 && movie.Type.length > 0
-		);
-	};
 	return (
-		<Form onSubmit={submitHandler} className="container mt-5">
-			<Form.Group className="title-container" controlId="formGridAddress2">
-				<Form.Label>Title</Form.Label>
-				<Form.Control
-					required
-					type="text"
-					value={movie.Title}
-					onChange={(e) => {
-						inputHandler('Title', e.target.value);
-					}}
-					placeholder="Title of the movie"
-				/>
-			</Form.Group>
+		<>
+			<Form onSubmit={submitHandler} className="container col-8 container-form-movie">
+				<h3> Movie to Database Form</h3>
 
-			<Form.Group className="info-container">
-				<Form.Group as={Col} controlId="formGridZip">
-					<Form.Label>Year</Form.Label>
+				<Form.Group className="title-container" controlId="formGridAddress2">
+					<h5>Title</h5>
 					<Form.Control
 						required
 						type="text"
-						value={movie.Year}
+						value={movie.Title}
 						onChange={(e) => {
-							inputHandler('Year', e.target.value);
+							inputHandler('Title', e.target.value);
 						}}
+						placeholder="Title of the movie"
 					/>
 				</Form.Group>
 
-				<Form.Group as={Col} controlId="formGridZip">
-					<Form.Label>Type</Form.Label>
+				<Form.Group className="info-container">
+					<Form.Group controlId="formGridZip">
+						<h5>Year</h5>
+						<Form.Control
+							required
+							type="text"
+							value={movie.Year}
+							onChange={(e) => {
+								inputHandler('Year', e.target.value);
+							}}
+						/>
+					</Form.Group>
+
+					<Form.Group controlId="formGridZip">
+						<h5>Type</h5>
+						<Form.Control
+							required
+							type="text"
+							value={movie.Type}
+							onChange={(e) => {
+								inputHandler('Type', e.target.value);
+							}}
+						/>
+					</Form.Group>
+					<Form.Group controlId="formGridCity">
+						<h5>Poster </h5>
+						<input
+							type="file"
+							accept="image/png, image/jpeg"
+							required
+							onChange={(e) => {
+								setImage(e.target.files[0]);
+							}}
+						/>
+					</Form.Group>
+				</Form.Group>
+
+				<Button disabled={!isFormComplete} variant="primary" type="submit">
+					Create new Movie
+				</Button>
+			</Form>
+
+			{/* <Form onSubmit={submitHandler} className="container mt-5">
+				<Form.Group className="title-container" controlId="formGridAddress2">
+					<h5>Title</h5>
 					<Form.Control
 						required
 						type="text"
-						value={movie.Type}
+						value={movie.Title}
 						onChange={(e) => {
-							inputHandler('Type', e.target.value);
+							inputHandler('Title', e.target.value);
 						}}
+						placeholder="Title of the movie"
 					/>
 				</Form.Group>
-				<Form.Group as={Col} controlId="formGridCity">
-					<Form.Label>Poster</Form.Label>
-					<Form.Control
-						type="file"
-						required
-						onChange={(e) => setImage(e.target.files[0])}
-					/>
-				</Form.Group>
-			</Form.Group>
 
-			<Button disabled={!isFormComplete} variant="primary" type="submit">
-				Submit
-			</Button>
-		</Form>
+				<Form.Group className="info-container">
+					<Form.Group as={Col} controlId="formGridZip">
+						<h5>Year</h5>
+						<Form.Control
+							required
+							type="text"
+							value={movie.Year}
+							onChange={(e) => {
+								inputHandler('Year', e.target.value);
+							}}
+						/>
+					</Form.Group>
+
+					<Form.Group as={Col} controlId="formGridZip">
+						<h5>Type</h5>
+						<Form.Control
+							required
+							type="text"
+							value={movie.Type}
+							onChange={(e) => {
+								inputHandler('Type', e.target.value);
+							}}
+						/>
+					</Form.Group>
+					<Form.Group as={Col} controlId="formGridCity">
+						<h5>Poster</h5>
+						<Form.Control
+							type="file"
+							accept="image/png, image/jpeg"
+							required
+							onChange={(e) => {
+								setImage(e.target.files[0]);
+							}}
+						/>
+					</Form.Group>
+				</Form.Group>
+
+				<Button disabled={!isFormComplete} variant="primary" type="submit">
+					Edit A Movie
+				</Button>
+			</Form> */}
+		</>
 	);
 }
